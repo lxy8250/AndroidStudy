@@ -35,6 +35,7 @@ public class AppBarActivity extends AppCompatActivity {
     private void initView() {
         toolbar = findViewById(R.id.appToolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         rvApp = findViewById(R.id.appRV);
         adapter = new TestAdapter(this,list,R.layout.item_appbar);
         rvApp.setLayoutManager(new LinearLayoutManager(this));
