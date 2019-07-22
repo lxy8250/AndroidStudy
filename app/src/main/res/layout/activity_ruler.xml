@@ -4,31 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lxy.androidstudy.ruler.RulerActivity">
+    tools:context=".customView.ruler.RulerActivity">
 
-    <TextView
-        android:id="@+id/ruler_weight"
-        android:textColor="@color/green"
-        android:textSize="35dp"
-        android:text="25"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <com.lxy.androidstudy.customView.FlowLayout
+        android:id="@+id/activity_flow"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
 
-    <TextView
-        android:textColor="@color/black"
-        android:textSize="35dp"
-        android:text="kg"
-        android:layout_toRightOf="@id/ruler_weight"
-        android:layout_alignTop="@id/ruler_weight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <com.lxy.androidstudy.ruler.HorizontalRuler
-        android:layout_below="@id/ruler_weight"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    </com.lxy.androidstudy.customView.FlowLayout>
 </RelativeLayout>

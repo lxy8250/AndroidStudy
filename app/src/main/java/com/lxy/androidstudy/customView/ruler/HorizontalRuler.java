@@ -1,4 +1,4 @@
-package com.lxy.androidstudy.ruler;
+package com.lxy.androidstudy.customView.ruler;
 
 import android.content.Context;
 import android.graphics.Canvas;

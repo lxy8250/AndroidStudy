@@ -25,4 +25,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:text="右滑返回"
+        android:id="@+id/swipeback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="点赞之交"
+        android:id="@+id/like"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="handle 的使用"
+        android:id="@+id/handle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

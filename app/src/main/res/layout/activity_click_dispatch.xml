@@ -6,5 +6,25 @@
     android:layout_height="match_parent"
     tools:context="com.lxy.androidstudy.clickdispatch.ClickDispatchActivity">
 
+    <com.lxy.androidstudy.clickdispatch.MyViewGroup
+        android:id="@+id/group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/click_dispatch"
+            android:text="click1"
+            android:clickable="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/click_dispatch2"
+            android:text="click2"
+            android:clickable="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.lxy.androidstudy.clickdispatch.MyViewGroup>
+
 
 </android.support.constraint.ConstraintLayout>

@@ -8,13 +8,19 @@ import android.widget.Button;
 
 import com.lxy.androidstudy.anim.AnimatorActivity;
 import com.lxy.androidstudy.appbar.AppBarActivity;
+import com.lxy.androidstudy.customView.ruler.RulerActivity;
+import com.lxy.androidstudy.handle.HandleActivity;
 import com.lxy.androidstudy.rxjava.Rxjava2Activity;
+import com.lxy.androidstudy.swipeback.SwipeBackActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button animatorButton;
-    Button handleButton;
+    Button rxJavaButton;
     Button appbarButton;
+    Button swipebackButton;
+    Button likeButton;
+    Button handleButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,14 +33,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initListener() {
         animatorButton.setOnClickListener(this);
-        handleButton.setOnClickListener(this);
+        rxJavaButton.setOnClickListener(this);
         appbarButton.setOnClickListener(this);
+        swipebackButton.setOnClickListener(this);
+        likeButton.setOnClickListener(this);
+        handleButton.setOnClickListener(this);
     }
 
     private void initView() {
         animatorButton = findViewById(R.id.value_animator);
-        handleButton = findViewById(R.id.handle_la);
+        rxJavaButton = findViewById(R.id.handle_la);
         appbarButton = findViewById(R.id.appbar);
+        swipebackButton = findViewById(R.id.swipeback);
+        likeButton = findViewById(R.id.like);
+        handleButton = findViewById(R.id.handle);
     }
 
     @Override
@@ -53,6 +65,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.setClass(MainActivity.this, AppBarActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.swipeback:
+                intent.setClass(MainActivity.this, SwipeBackActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.like:
+                intent.setClass(MainActivity.this, RulerActivity.class);
+                startActivity(intent);
+            case R.id.handle:
+                intent.setClass(MainActivity.this, HandleActivity.class);
+                startActivity(intent);
 
             default:
                 break;

@@ -1,6 +1,10 @@
 package com.lxy.androidstudy;
 
 import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -12,12 +16,13 @@ public class ToastUtil {
     private Context context;
     private static Toast toast;
 
+
     public static void showToast(Context context,String message){
         if (toast == null){
             toast = Toast.makeText(context,message,Toast.LENGTH_SHORT);
         }
         toast.setText(message);
-
+        toast.setDuration(Toast.LENGTH_SHORT);
         toast.show();
 
     }
