@@ -27,16 +27,16 @@ public class HandleActivity extends AppCompatActivity {
     TextView tvMessage;
 
     Handler threadHandler;
-    private Handler handler = new Handler(new Handler.Callback() {
+    private Handler handler = new Handler(){
         @Override
-        public boolean handleMessage(Message msg) {
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
             switch (msg.what){
                 case 1:
                     tvMessage.setText((CharSequence) msg.obj);
             }
-            return false;
         }
-    });
+    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +45,12 @@ public class HandleActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         initThreadHandler();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
     }
 
     private void initThreadHandler() {
