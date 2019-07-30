@@ -72,10 +72,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.like:
                 intent.setClass(MainActivity.this, RulerActivity.class);
                 startActivity(intent);
+                break;
             case R.id.handle:
                 intent.setClass(MainActivity.this, HandleActivity.class);
                 startActivity(intent);
-
+                break;
             default:
                 break;
         }

@@ -20,8 +20,7 @@ public class FlowLayout extends ViewGroup {
 
     List<ViewPos> vPos = new ArrayList<>();
     private Scroller scroller;
-    private VelocityTracker velocityTracker;
-    private int mLastScreen;
+    private int viewHeight;
     private int realHeight;
 
     public interface OnItemClickListener {
@@ -29,19 +28,17 @@ public class FlowLayout extends ViewGroup {
     }
 
     public FlowLayout(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public FlowLayout(Context context, AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public FlowLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         scroller = new Scroller(context);
-        velocityTracker = VelocityTracker.obtain();
     }
-
 
 
     @Override
@@ -64,41 +61,41 @@ public class FlowLayout extends ViewGroup {
         int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
             View child = getChildAt(i);//获取每一个子view
-            measureChild(child,widthMeasureSpec,heightMeasureSpec);//测量子view
+            measureChild(child, widthMeasureSpec, heightMeasureSpec);//测量子view
             MarginLayoutParams lp = (MarginLayoutParams) child.getLayoutParams();
             int childW = child.getMeasuredWidth() + lp.leftMargin + lp.rightMargin;//得到子view的宽高
             int childH = child.getMeasuredHeight() + lp.topMargin + lp.bottomMargin;
 
-            if (childW + lineW > widthSize - getPaddingLeft() - getPaddingRight()){//如果放入该view是超过父布局宽度，换行
-                width = Math.max(lineW,childW);//取最大行宽为父布局行宽
-                height +=lineH;//高度累加
+            if (childW + lineW > widthSize - getPaddingLeft() - getPaddingRight()) {//如果放入该view是超过父布局宽度，换行
+                width = Math.max(lineW, childW);//取最大行宽为父布局行宽
+                height += lineH;//高度累加
 
                 //开启新行
                 lineW = childW;
                 lineH = childH;
-                vPos.add(new ViewPos(getPaddingLeft()+lp.leftMargin,
-                        getPaddingTop()+lp.topMargin+height,
+                vPos.add(new ViewPos(getPaddingLeft() + lp.leftMargin,
+                        getPaddingTop() + lp.topMargin + height,
                         getPaddingLeft() + childW - lp.rightMargin,
                         getPaddingTop() + height + childH - lp.bottomMargin));
-            }else {//如果不换行，则宽度累加，高度取最大值
+            } else {//如果不换行，则宽度累加，高度取最大值
                 vPos.add(new ViewPos(getPaddingLeft() + lineW + lp.leftMargin,
                         getPaddingTop() + height + lp.topMargin,
                         getPaddingLeft() + lineW + childW - lp.rightMargin,
                         getPaddingTop() + height + childH - lp.bottomMargin));
                 lineW += childW;
-                lineH = Math.max(lineH,childH);
+                lineH = Math.max(lineH, childH);
 
             }
 
-            if (i == childCount -1){
+            if (i == childCount - 1) {
                 width = Math.max(width, lineW);
                 height += lineH;
             }
         }
-        Log.i("FLOW",width+"   "+height);
+        Log.i("FLOW", width + "   " + height);
         realHeight = height;
-        setMeasuredDimension((widthMode == MeasureSpec.EXACTLY) ? widthSize : width +getPaddingLeft()+getPaddingRight(),
-                (heightMode == MeasureSpec.EXACTLY ? heightSize : height +getPaddingTop()+getPaddingBottom()));
+        setMeasuredDimension((widthMode == MeasureSpec.EXACTLY) ? widthSize : width + getPaddingLeft() + getPaddingRight(),
+                (heightMode == MeasureSpec.EXACTLY ? heightSize : height + getPaddingTop() + getPaddingBottom()));
     }
 
     @Override
@@ -110,6 +107,8 @@ public class FlowLayout extends ViewGroup {
             //设置View的左边、上边、右边底边位置
             child.layout(pos.left, pos.top, pos.right, pos.bottom);
         }
+        viewHeight = getHeight();
+        Log.i("FLOW", viewHeight + "   " );
     }
 
 
@@ -133,54 +132,61 @@ public class FlowLayout extends ViewGroup {
     private int lastHeight = 0;
     private float nextHeight;
     private float startHeight;
-    private float endHeight;
     private int tempHeight;
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()){
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                startHeight = event.getY();
+                startHeight = event.getRawY();
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (!scroller.isFinished()){
+                if (!scroller.isFinished()) {
                     scroller.abortAnimation();
                 }
-                nextHeight = event.getY();
+                nextHeight = event.getRawY();
                 int subY = (int) (nextHeight - startHeight);
                 tempHeight = lastHeight + subY;
-                Log.i("height",String.valueOf(tempHeight));
-                if (tempHeight > realHeight){
-                    tempHeight = realHeight;
+                Log.i("height", String.valueOf(tempHeight));
+                if (tempHeight > 0) {
+                    tempHeight = 0 ;
                 }
-                if (tempHeight < 0){
-                    tempHeight = 0;
+                if (tempHeight < -getAllScrollHeight()){
+                    tempHeight = -getAllScrollHeight();
                 }
                 scrollTo(0, -tempHeight);
                 break;
             case MotionEvent.ACTION_UP:
-                endHeight = event.getY();
                 lastHeight = tempHeight;
 
         }
         return true;
     }
 
+    /**
+     * 获取控件可以滑动的最大高度
+     * @return
+     */
+    private int getAllScrollHeight() {
+        return realHeight - viewHeight;
+    }
+
     @Override
     public void computeScroll() {
         super.computeScroll();
-        if (scroller.computeScrollOffset()){
-            scrollTo(scroller.getCurrX(),scroller.getCurrY());
+        if (scroller.computeScrollOffset()) {
+            scrollTo(scroller.getCurrX(), scroller.getCurrY());
             invalidate();
         }
     }
 
-    private class ViewPos{
+    private class ViewPos {
         int left;
         int top;
         int right;
         int bottom;
 
-        public ViewPos(int left,int top,int right,int bottom){
+        public ViewPos(int left, int top, int right, int bottom) {
             this.left = left;
             this.top = top;
             this.right = right;

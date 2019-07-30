@@ -8,8 +8,9 @@
 
     <com.lxy.androidstudy.customView.FlowLayout
         android:id="@+id/activity_flow"
+        android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="350dp">
 
     </com.lxy.androidstudy.customView.FlowLayout>
 </RelativeLayout>

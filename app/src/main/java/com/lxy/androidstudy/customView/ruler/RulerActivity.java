@@ -27,7 +27,7 @@ public class RulerActivity extends AppCompatActivity {
 
     private void init() {
         LayoutInflater inflater = LayoutInflater.from(this);
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 50; i++) {
             TextView tv = (TextView) inflater.inflate(R.layout.item_flow,flowLayout,false);
             tv.setText("aaaaaaaaa" + i);
             flowLayout.addView(tv);
