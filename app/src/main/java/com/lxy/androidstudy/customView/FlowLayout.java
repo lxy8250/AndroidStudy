@@ -60,15 +60,21 @@ public class FlowLayout extends ViewGroup {
         vPos.clear();
         int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
-            View child = getChildAt(i);//获取每一个子view
-            measureChild(child, widthMeasureSpec, heightMeasureSpec);//测量子view
+            //获取每一个子view
+            View child = getChildAt(i);
+            //测量子view
+            measureChild(child, widthMeasureSpec, heightMeasureSpec);
             MarginLayoutParams lp = (MarginLayoutParams) child.getLayoutParams();
-            int childW = child.getMeasuredWidth() + lp.leftMargin + lp.rightMargin;//得到子view的宽高
+            //得到子view的宽高
+            int childW = child.getMeasuredWidth() + lp.leftMargin + lp.rightMargin;
             int childH = child.getMeasuredHeight() + lp.topMargin + lp.bottomMargin;
 
-            if (childW + lineW > widthSize - getPaddingLeft() - getPaddingRight()) {//如果放入该view是超过父布局宽度，换行
-                width = Math.max(lineW, childW);//取最大行宽为父布局行宽
-                height += lineH;//高度累加
+            //如果放入该view是超过父布局宽度，换行
+            if (childW + lineW > widthSize - getPaddingLeft() - getPaddingRight()) {
+                //取最大行宽为父布局行宽
+                width = Math.max(lineW, childW);
+                //高度累加
+                height += lineH;
 
                 //开启新行
                 lineW = childW;
@@ -125,6 +131,7 @@ public class FlowLayout extends ViewGroup {
         }
     }
 
+    @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
         return new MarginLayoutParams(getContext(), attrs);
     }

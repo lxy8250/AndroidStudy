@@ -42,4 +42,10 @@
         android:id="@+id/handle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:text="自定义View"
+        android:id="@+id/customView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

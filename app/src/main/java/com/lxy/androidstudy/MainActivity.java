@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import com.lxy.androidstudy.anim.AnimatorActivity;
 import com.lxy.androidstudy.appbar.AppBarActivity;
+import com.lxy.androidstudy.customView.CoustomViewActivity;
 import com.lxy.androidstudy.customView.ruler.RulerActivity;
 import com.lxy.androidstudy.handle.HandleActivity;
 import com.lxy.androidstudy.rxjava.Rxjava2Activity;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button swipebackButton;
     Button likeButton;
     Button handleButton;
+    Button customViewButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         swipebackButton.setOnClickListener(this);
         likeButton.setOnClickListener(this);
         handleButton.setOnClickListener(this);
+        customViewButton.setOnClickListener(this);
     }
 
     private void initView() {
@@ -47,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         swipebackButton = findViewById(R.id.swipeback);
         likeButton = findViewById(R.id.like);
         handleButton = findViewById(R.id.handle);
+        customViewButton = findViewById(R.id.customView);
     }
 
     @Override
@@ -75,6 +79,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.handle:
                 intent.setClass(MainActivity.this, HandleActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.customView:
+                intent.setClass(MainActivity.this, CoustomViewActivity.class);
                 startActivity(intent);
                 break;
             default:
